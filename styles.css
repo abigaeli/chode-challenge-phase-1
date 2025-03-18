@@ -50,7 +50,7 @@ h1 {
 }
 
 form {
-    background: lavender;
+    background: whitesmoke(122, 122, 175);
     padding: 15px;
     width: 50%;
     margin: 20px auto;

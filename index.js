@@ -13,8 +13,8 @@ const ramens = [
         id: 2, 
         name: "Miso Ramen", 
         restaurant: "Menya", 
-        rating: 4, 
         image: "https://images.pexels.com/photos/884600/pexels-photo-884600.jpeg?auto=compress&cs=tinysrgb&w=300", 
+        rating: 4, 
         comment: "Very flavorful!" 
     },
     { 
@@ -24,19 +24,36 @@ const ramens = [
         image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80", 
         rating: 3, 
         comment: "Creamy and rich!" 
+    },
+    {
+        id: 4, 
+        name: "Spicy Ramen", 
+        restaurant: "Tatsu Ramen", 
+        image: "https://images.unsplash.com/photo-1683112687828-15e05dd682f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.", // ✅ Updated working URL
+        rating: 4, 
+        comment: "Perfect amount of spice!"
     }
 ];
 
 let currentRamen = null;
+
 function displayRamens() {
     const ramenMenu = document.getElementById("ramen-menu");
     ramenMenu.innerHTML = "";
 
     ramens.forEach(ramen => {
+        console.log(`Adding image: ${ramen.image}`); 
         const img = document.createElement("img");
         img.src = ramen.image;
         img.alt = ramen.name;
         img.classList.add("ramen-thumbnail"); 
+
+        
+        img.onerror = () => {
+            img.src = "https://via.placeholder.com/300?text=Image+Not+Found";
+            console.warn(`Failed to load image: ${ramen.image}`);
+        };
+
         img.addEventListener("click", () => handleClick(ramen));
         ramenMenu.appendChild(img);
     });
@@ -91,7 +108,6 @@ function addSubmitListener() {
     });
 }
 
-
 function editRamenDetails() {
     const editForm = document.getElementById("edit-ramen-form");
     editForm.addEventListener("submit", function (event) {
@@ -108,7 +124,6 @@ function editRamenDetails() {
         }
     });
 }
-
 
 function deleteRamen() {
     const deleteButton = document.getElementById("delete-ramen");
